@@ -15,7 +15,24 @@ fs.createReadStream('primaryschool.csv')
   })
   .on('end', function () {
     // We are done
-    console.log(obj);
+
+    var g= obj.district_name.reduce(function(total,district){
+       total[district] = (total[district] || 0) + 1 ;
+        return total;
+
+    },{});
+     var i= obj.block_name.reduce(function(total,block){
+       total[block] = (total[block] || 0) + 1 ;
+        return total;
+
+    },{});
+      var n= obj.moi.reduce(function(total,mo){
+       total[mo] = (total[mo] || 0) + 1 ;
+        return total;
+
+    },{});
+
+    console.log(i);
 })
 
 
