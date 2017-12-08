@@ -16,6 +16,7 @@ fs.createReadStream('primaryschool.csv')
   .on('end', function () {
     // We are done
 
+
     var districts= obj.district_name.reduce(function(total,district){
        total[district] = (total[district] || 0) + 1 ;
         return total;
@@ -31,7 +32,7 @@ fs.createReadStream('primaryschool.csv')
         return total;
 
     },{});
-
+      console.log(moi);
       // var chart={
      var chart=   {
     chart: {
@@ -75,15 +76,15 @@ fs.createReadStream('primaryschool.csv')
 
       // var n=Object.keys(districts);
       // console.log(n);
-      for(var i in districts)
-      {
-        chart.xAxis.categories.push(i);
-        chart.series[0].data.push(districts[i]);
+      // for(var i in districts)
+      // {
+      //   chart.xAxis.categories.push(i);
+      //   chart.series[0].data.push(districts[i]);
 
-      }
-      var json=JSON.stringify(chart);
-      var fs = require('fs');
-      fs.writeFile('myjsonfile.json', json, 'utf8');
+      // }
+      // var json=JSON.stringify(chart);
+      // var fs = require('fs');
+      // fs.writeFile('myjsonfile.json', json, 'utf8');
 
 });
 
