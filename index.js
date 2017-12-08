@@ -82,9 +82,9 @@ fs.createReadStream('primaryschool.csv')
       //   chart.series[0].data.push(districts[i]);
 
       // }
-      // var json=JSON.stringify(chart);
-      // var fs = require('fs');
-      // fs.writeFile('myjsonfile.json', json, 'utf8');
+      var json=JSON.stringify(chart);
+      var fs = require('fs');
+      fs.writeFile('myjsonfile.json', json, 'utf8');
 
 });
 

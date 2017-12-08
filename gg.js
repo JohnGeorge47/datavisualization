@@ -138,7 +138,11 @@ chartObj=
 
 });
   chartObj.series=datalan;
-  console.log(chartObj);
+
+  var json=JSON.stringify(chartObj);
+      var fs = require('fs');
+      fs.writeFile('nextjsonfile.json', json, 'utf8');
+
 
 
 });
