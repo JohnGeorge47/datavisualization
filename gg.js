@@ -30,7 +30,7 @@ fs.createReadStream('primaryschool.csv')
         districts.push(a);
       }
     });
-    console.log(average);
+
     var moi = [];
     obj.moi.map(function(b) {
       if (moi.indexOf(b) == -1) {
@@ -68,5 +68,77 @@ fs.createReadStream('primaryschool.csv')
         }
 
     });
-    console.log(obj1);
+
+
+
+chartObj=
+  {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Stacked column chart'
+    },
+    xAxis: {
+        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Total fruit consumption'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'John',
+        data: [5, 3, 4, 7, 2]
+    }, {
+        name: 'Jane',
+        data: [2, 2, 3, 2, 1]
+    }, {
+        name: 'Joe',
+        data: [3, 4, 4, 2, 5]
+    }]
+}
+  for(var keys in obj1)
+  {
+    chartObj.xAxis.categories.push(keys);
+  }
+
+  datalan=[];
+
+
+  moi.map(function(lang){
+
+     if(lang!='')
+     {
+    var langno=[];
+    var list={
+    };
+
+
+        for(var keys in obj1 ){
+              if(obj1[keys].hasOwnProperty(lang)){
+                langno.push(obj1[keys][lang])
+              }
+              list["name"]=lang;
+              list["data"]=langno;
+      }
+
+       datalan.push(list);
+  }
+
+});
+  chartObj.series=datalan;
+  console.log(chartObj);
+
+
 });
