@@ -30,31 +30,7 @@ fs.createReadStream('primaryschool.csv')
         districts.push(a);
       }
     });
-   function compute(current,no){
-    console.log(current);
-      var a=new Array(no).fill(0);
-
-      average.map(function(name){
-          if(name.hasOwnProperty(current)){
-
-                 var g=moi.indexOf(name[current]);
-                 if(g!=0)
-                 {
-                  a[g]++;
-
-                 }
-          }
-          });
-       return a;
-
-   }
-
-
-
-
-
-
-
+    console.log(average);
     var moi = [];
     obj.moi.map(function(b) {
       if (moi.indexOf(b) == -1) {
@@ -65,23 +41,32 @@ fs.createReadStream('primaryschool.csv')
     moi.sort(function(a,b){
       return a-b;
     });
+    obj1={
 
-    var no=moi.length;
-    var s=[];
-    districts.map(function(currentd){
-      var obj1={
-      name:'',
-      languages:0
-        };
-      obj1["name"]=currentd;
-      rs.push(obj1);
-      var f=compute(currentd,no);
-      console.log(f);
+    }
+    districts.map(function(district){
+        obj1[district]={};
+        moi.map(function(lang){
+            obj1[district][lang]=0;
+
+        });
+    });
+    average.map(function(district){
+        for(var dist in obj1)
+        {
+          if(district.hasOwnProperty(dist))
+          {
 
 
+              if(obj1[dist].hasOwnProperty(district[dist]))
+              {
+                obj1[dist][district[dist]]=obj1[dist][district[dist]]+1;
+
+              }
+
+          }
+        }
 
     });
-
-
-
+    console.log(obj1);
 });
