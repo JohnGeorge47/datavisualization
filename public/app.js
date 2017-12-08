@@ -28,6 +28,20 @@ $(document).ready(function(){
        },
        dataType:"json",
     });
+     $.ajax({
+       type: "GET",
+       url :"category.json",
+       success:function(data)
+       {
+         console.log(data);
+         Highcharts.chart('container3', data);
+
+
+
+       },
+       dataType:"json",
+    });
+
 
 
 

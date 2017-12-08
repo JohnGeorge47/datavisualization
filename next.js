@@ -149,7 +149,9 @@ for(var keys in obj1)
 });
   chartObj.series=datalan;
   console.log(chartObj);
-
+  var json = JSON.stringify(chartObj);
+  var fs = require('fs');
+   fs.writeFile('category.json', json, 'utf8');
 
 
 
