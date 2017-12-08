@@ -18,6 +18,34 @@ fs.createReadStream('primaryschool.csv')
   .on('end', function() {
     // We are done
 
+chartObj=
+  {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Stacked column chart'
+    },
+    xAxis: {
+        categories: []
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Total schools based on category'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: []
+}
 
 
 
@@ -90,7 +118,39 @@ fs.createReadStream('primaryschool.csv')
           }
         }
       });
-        console.log(obj1);
+
+
+for(var keys in obj1)
+  {
+    chartObj.xAxis.categories.push(keys);
+  }
+  datalan=[];
+
+  category.map(function(lang){
+
+     if(lang!='')
+     {
+    var langno=[];
+    var list={
+    };
+
+
+        for(var keys in obj1 ){
+              if(obj1[keys].hasOwnProperty(lang)){
+                langno.push(obj1[keys][lang])
+              }
+              list["name"]=lang;
+              list["data"]=langno;
+      }
+
+       datalan.push(list);
+  }
+
+});
+  chartObj.series=datalan;
+  console.log(chartObj);
+
+
 
 
 
