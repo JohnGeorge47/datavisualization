@@ -37,103 +37,96 @@ fs.createReadStream('primaryschool.csv')
         moi.push(b);
       }
     });
-    var rs=[]
-    moi.sort(function(a,b){
-      return a-b;
+    var rs = []
+    moi.sort(function(a, b) {
+      return a - b;
     });
-    obj1={
+    obj1 = {
 
     }
-    districts.map(function(district){
-        obj1[district]={};
-        moi.map(function(lang){
-            obj1[district][lang]=0;
+    districts.map(function(district) {
+      obj1[district] = {};
+      moi.map(function(lang) {
+        obj1[district][lang] = 0;
 
-        });
+      });
     });
-    average.map(function(district){
-        for(var dist in obj1)
-        {
-          if(district.hasOwnProperty(dist))
-          {
+    average.map(function(district) {
+      for (var dist in obj1) {
+        if (district.hasOwnProperty(dist)) {
 
 
-              if(obj1[dist].hasOwnProperty(district[dist]))
-              {
-                obj1[dist][district[dist]]=obj1[dist][district[dist]]+1;
-
-              }
+          if (obj1[dist].hasOwnProperty(district[dist])) {
+            obj1[dist][district[dist]] = obj1[dist][district[dist]] + 1;
 
           }
+
         }
+      }
 
     });
 
 
 
-var chartObj=
-  {
-    chart: {
+    var chartObj = {
+      chart: {
         type: 'column'
-    },
-    title: {
+      },
+      title: {
         text: 'Stacked column chart'
-    },
-    xAxis: {
+      },
+      xAxis: {
         categories: []
-    },
-    yAxis: {
+      },
+      yAxis: {
         min: 0,
         title: {
-            text: 'Stacked chart with the medium of Instruction per district'
+          text: 'Stacked chart with the medium of Instruction per district'
         }
-    },
-    tooltip: {
+      },
+      tooltip: {
         pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
         shared: true
-    },
-    plotOptions: {
+      },
+      plotOptions: {
         column: {
-            stacking: 'percent'
+          stacking: 'percent'
         }
-    },
-    series: 0
-}
-  for(var keys in obj1)
-  {
-    chartObj.xAxis["categories"].push(keys);
-  }
+      },
+      series: 0
+    }
+    for (var keys in obj1) {
+      chartObj.xAxis["categories"].push(keys);
+    }
 
-  datalan=[];
-
-
-  moi.map(function(lang){
-
-     if(lang!='')
-     {
-    var langno=[];
-    var list={
-    };
+    datalan = [];
 
 
-        for(var keys in obj1 ){
-              if(obj1[keys].hasOwnProperty(lang)){
-                langno.push(obj1[keys][lang])
-              }
-              list["name"]=lang;
-              list["data"]=langno;
+    moi.map(function(lang) {
+
+      if (lang != '') {
+        var langno = [];
+        var list = {};
+
+
+        for (var keys in obj1) {
+          if (obj1[keys].hasOwnProperty(lang)) {
+            langno.push(obj1[keys][lang])
+          }
+          list["name"] = lang;
+          list["data"] = langno;
+        }
+
+        datalan.push(list);
       }
 
-       datalan.push(list);
-  }
-
-});
-  chartObj.series=datalan;
-  console.log(chartObj);
-  var json=JSON.stringify(chartObj);
-      var fs = require('fs');
-      fs.writeFile('moijsonfile.json', json, 'utf8');
+    });
+    chartObj.series = datalan;
+    console.log(chartObj);
+    // var json = JSON.stringify(chartObj);
+    // var fs = require('fs');
+    // fs.writeFile('moijsonfile.json', json, 'utf8');
 
 
 
-});
+  });
